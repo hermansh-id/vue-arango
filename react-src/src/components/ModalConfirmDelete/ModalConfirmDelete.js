@@ -53,7 +53,7 @@ class ModalConfirmDelete extends Component {
           <p>Are you sure you want to delete <strong>{this.props.user.name}</strong>?</p>
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={this.handleSubmit} data-userID={this.props.user._id} color='red'>Yes</Button>
+          <Button onClick={this.handleSubmit} data-userID={this.props.user._key} color='red'>Yes</Button>
           <Button onClick={this.handleClose} color='black'>No</Button>
           </Modal.Actions>
       </Modal>

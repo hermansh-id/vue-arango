@@ -1,6 +1,8 @@
-// Set the connection string based from the config vars of the production server
-// To run locally use 'mongodb://localhost/mern-crud' instead of process.env.DB
-
 module.exports = {
-  db: process.env.DB
+  'url': 'http://127.0.0.1:8529', 
+  'database': 'project', 
+
+  // Database user credentials to use
+  'username': 'root',
+  'password': 'jarsisapk'
 };

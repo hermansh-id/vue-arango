@@ -15,7 +15,7 @@ class App extends Component {
   constructor() {
     super();
 
-    this.server = process.env.REACT_APP_API_URL || '';
+    this.server = process.env.REACT_APP_API_URL || 'http://localhost:3000';
     this.socket = io.connect(this.server);
 
     this.state = {
@@ -59,7 +59,7 @@ class App extends Component {
   handleUserUpdated(user) {
     let users = this.state.users.slice();
     for (let i = 0, n = users.length; i < n; i++) {
-      if (users[i]._id === user._id) {
+      if (users[i]._key === user._key) {
         users[i].name = user.name;
         users[i].email = user.email;
         users[i].age = user.age;
@@ -72,7 +72,7 @@ class App extends Component {
 
   handleUserDeleted(user) {
     let users = this.state.users.slice();
-    users = users.filter(u => { return u._id !== user._id; });
+    users = users.filter(u => { return u._key !== user._key; });
     this.setState({ users: users });
   }
 
@@ -87,16 +87,8 @@ class App extends Component {
         <div className='App'>
           <div className='App-header'>
             <img src={logo} className='App-logo' alt='logo' />
-            <h1 className='App-intro'>MERN CRUD</h1>
-            <p>A simple records system using MongoDB, Express.js, React.js, and Node.js with real-time Create, Read, Update, and Delete operations using Socket.io.</p>
-            <p>REST API was implemented on the back-end. Semantic UI React was used for the UI.</p>
-            <p>
-              <a className='social-link' href='https://github.com/cefjoeii' target='_blank' rel='noopener noreferrer'>GitHub</a> &bull; <a className='social-link' href='https://linkedin.com/in/cefjoeii' target='_blank' rel='noopener noreferrer'>LinkedIn</a> &bull; <a className='social-link' href='https://twitter.com/cefjoeii' target='_blank' rel='noopener noreferrer'>Twitter</a>
-            </p>
-            <a className='shirts' href='https://www.teepublic.com/user/codeweario' target='_blank' rel='noopener noreferrer'>
-              <img src={shirts} alt='Programmer Shirts' />
-              <span>Ad</span>
-            </a>
+            <h1 className='App-intro'>PENDAFTARAN NAMA</h1>
+            <p>Simpel Sistem Angaro DB dengan React JS</p>
           </div>
         </div>
         <Container>

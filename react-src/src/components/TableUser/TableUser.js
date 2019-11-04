@@ -11,7 +11,7 @@ class TableUser extends Component {
     let users = this.props.users;
 
     users = users.map((user) => 
-      <Table.Row key={user._id}>
+      <Table.Row key={user._key}>
         <Table.Cell>{user.name}</Table.Cell>
         <Table.Cell>{user.email}</Table.Cell>
         <Table.Cell>{user.age}</Table.Cell>
@@ -22,7 +22,7 @@ class TableUser extends Component {
             buttonTriggerTitle='Edit'
             buttonSubmitTitle='Save'
             buttonColor='blue'
-            userID={user._id}
+            userID={user._key}
             onUserUpdated={this.props.onUserUpdated}
             server={this.props.server}
             socket={this.props.socket}
