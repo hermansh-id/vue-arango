@@ -7,6 +7,9 @@ var express = require('express'),
   router = express.Router(),
   ArticleService = require('../services/article');
 
+  const redis = require('redis');
+  const client = redis.createClient();
+  
 /* POST an article */
 router.post('/', function(req, res) {
   var article = {
@@ -54,8 +57,21 @@ router.put('/:id', function(req, res) {
   });
 });
 
+function cacheUser(req, res, next) {
+  
+  const key = req.params.id;
+  client.get(key, function (err, data) {
+      if (err) throw err;
+
+      if (data != null) {
+          res.send(JSON.parse(data));
+      } else {
+          next();
+      }
+  });
+}
 /* GET an article by his key. */
-router.get('/:id', function(req, res) {
+router.get('/:id',cacheUser, function(req, res) {
   var id = req.params.id;
 
   ArticleService
@@ -63,7 +79,9 @@ router.get('/:id', function(req, res) {
   .then(function(doc) {
     console.log(`Get a document by key "${req.params.id}".`, doc._key);
 
-    return res.status(200).json(doc);
+    client.setex(doc._key, 3600, JSON.stringify(doc));
+
+    return res.send(JSON.stringify(doc));
   })
   .catch(function(error) {
     console.error('Error getting single document', error);
@@ -74,19 +92,34 @@ router.get('/:id', function(req, res) {
 /**
  * GET all saved articles
  */
-router.get('/', function(req, res) {
+
+function getArticle(req, res) {
   ArticleService
   .findAll()
   .then(function(response) {
     console.log(`Load all saved documents.`, response._result);
 
-    return res.status(200).json(response._result);
+    client.setex('user', 3600, JSON.stringify(response._result));
+
+    return res.send(JSON.stringify(response._result));
   })
   .catch(function(error) {
     console.error('Error getting documents', error);
     return res.status(500).json(error);
   });
-});
+}
+function cacheAll(req, res, next) {
+  client.get('user', function (err, data) {
+      if (err) throw err;
+
+      if (data != null) {
+          res.send(JSON.parse(data));
+      } else {
+          next();
+      }
+  });
+}
+router.get('/',cacheAll, getArticle);
 
 /* DELETE: delete a article by key */
 router.delete('/:articleKey', function(req, res) {
