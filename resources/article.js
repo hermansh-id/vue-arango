@@ -24,7 +24,7 @@ router.post('/', function(req, res) {
   .create(article)
   .then(function(doc) {
     console.log('Saved documents ' +  doc._key);
-
+    client.del('user');
     return res.status(200).json(doc);
   })
   .catch(function(error) {
@@ -48,7 +48,7 @@ router.put('/:id', function(req, res) {
   .update(article)
   .then(function(doc) {
     console.log('Updated document ' +  doc._key);
-
+    client.del('user');
     return res.status(200).json(doc);
   })
   .catch(function(error) {

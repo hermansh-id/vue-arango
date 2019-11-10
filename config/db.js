@@ -1,8 +1,8 @@
 module.exports = {
-  'url': 'http://127.0.0.1:8529', 
-  'database': 'project', 
+  'url': 'http://192.168.43.237:8529', 
+  'database': 'mahasiswa', 
 
   // Database user credentials to use
   'username': 'root',
-  'password': 'jarsisapk'
+  'password': 'root'
 };
