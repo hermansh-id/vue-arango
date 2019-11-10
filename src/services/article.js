@@ -2,7 +2,7 @@
  * ArticleService
  * @author dassiorleando
  */
-var dbConfig = require('../config/db'),
+var dbConfig = require('../../config/db'),
   arangojs = require('arangojs'),
   DB = new arangojs.Database({ // Database connection
     url: dbConfig.url

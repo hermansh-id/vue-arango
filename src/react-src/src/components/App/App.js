@@ -15,7 +15,7 @@ class App extends Component {
   constructor() {
     super();
 
-    this.server = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+    this.server = process.env.REACT_APP_API_URL || 'http://localhost:80';
     this.socket = io.connect(this.server);
 
     this.state = {

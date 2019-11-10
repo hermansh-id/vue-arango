@@ -16,8 +16,8 @@ class ModalConfirmDelete extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleOpen = e => this.setState({ modalOpen: true });
-  handleClose = e => this.setState({ modalOpen: false });
+  handleOpen(e) {this.setState({ modalOpen: true })}
+  handleClose(e) {this.setState({ modalOpen: false })}
 
   handleSubmit(e) {
 

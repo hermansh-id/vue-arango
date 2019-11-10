@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const articleAPI = require('./resources/article');
+const articleAPI = require('./src/resources/article');
 const socket = require('socket.io');
 
 const config = require('./config/db');
@@ -24,8 +24,6 @@ app.use(bodyParser.json());
 // Initialize routes middleware
 app.use('/api/users', articleAPI);
 
-app.use('/api/articles', articleAPI);
-
 // Use express's default error handling middleware
 app.use((err, req, res, next) => {
   if (res.headersSent) return next(err);
@@ -33,7 +31,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 
 const server = app.listen(port, () => {
   console.log(`Listening on port ${port}`);

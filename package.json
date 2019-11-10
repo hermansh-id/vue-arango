@@ -4,6 +4,7 @@
   "description": "A simple records system using MongoDB, Express.js, React.js, and Node.js with real-time CRUD operations using Socket.io",
   "main": "server.js",
   "scripts": {
+    "build": "webpack --mode development --config webpack.config.js && webpack --mode development",
     "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -33,5 +34,18 @@
     "socket.io": "2.0.3",
     "string-capitalize-name": "1.0.3",
     "superagent": "^5.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-node-externals": "^1.7.2"
   }
 }
